@@ -3,7 +3,8 @@
 Next.js 15 + Tailwind 4 + Framer Motion. Todas las páginas son estáticas.
 
 - Desarrollo: `npm run dev -- -p 3100` → http://localhost:3100
-- Producción: `npm run build` (Vercel lo detecta solo, sin configuración)
+- Producción: https://opulpino-web.vercel.app (proyecto de Vercel `opulpino-web`).
+- Código: https://github.com/Swap-Mind/opulpino-web (rama `main`). Cada push a `main` publica en Vercel.
 
 ## Dónde se edita el contenido
 - `src/lib/content.ts`: enlace de reservas, teléfono, email, sedes, horarios, fotos, reseñas y galería
