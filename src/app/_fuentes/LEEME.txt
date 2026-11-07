@@ -1,0 +1,5 @@
+Fuentes de Google Fonts guardadas en el proyecto (licencia SIL Open Font License),
+subconjunto "latin" (cubre español, gallego e inglés). Así la compilación no
+depende de que Google Fonts responda (el 07/11/2026 falló en Vercel).
+- cormorant-normal.woff2 / cormorant-italic.woff2: Cormorant Garamond, variable 500–700.
+- jost.woff2: Jost, variable 300–700.

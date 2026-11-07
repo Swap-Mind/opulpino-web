@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,14 +10,21 @@ import Movimiento from "@/components/Movimiento";
 import { EMAIL, IMG, PHONE, SEDES } from "@/lib/content";
 
 // Títulos: Cormorant Garamond (serif clásica, cursiva elegante). Texto: Jost.
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
+// Fuentes guardadas en el proyecto (app/_fuentes): la compilación no depende de Google Fonts.
+const cormorant = localFont({
+  src: [
+    { path: "./_fuentes/cormorant-normal.woff2", weight: "500 700", style: "normal" },
+    { path: "./_fuentes/cormorant-italic.woff2", weight: "500 700", style: "italic" },
+  ],
   variable: "--font-cormorant",
-  weight: ["500", "600", "700"],
-  style: ["normal", "italic"],
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+});
+const jost = localFont({
+  src: [{ path: "./_fuentes/jost.woff2", weight: "300 700", style: "normal" }],
+  variable: "--font-jost",
   display: "swap",
 });
-const jost = Jost({ subsets: ["latin"], variable: "--font-jost", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://restauranteopulpino.es"),
