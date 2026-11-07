@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Paleta inspirada en los locales: pizarra negra, tiza, platos naranjas y madera */
+@theme {
+  --color-pizarra: #121211;
+  --color-pizarra-2: #1b1b19;
+  --color-pizarra-3: #262523;
+  --color-tiza: #f4efe6;
+  --color-tiza-2: #e9e1d3;
+  /* Acento: ouro vello (latón). Sobre fondos claros pasa a bronce (ver .bg-tiza). */
+  --color-acento: #c9a45c;
+  --color-acento-2: #b38e48;
+  --color-sobre-acento: #141413;
+  --color-pemento: #9e2b17;
+  --color-madeira: #c9a27e;
+  --color-atlantico: #16313a;
+  --color-atlantico-2: #1d3d48;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Curvas y tiempos (Emil Kowalski): ease-out fuerte para lo que entra,
+     ease-in-out para lo que se mueve; la interfaz por debajo de 300 ms. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-pizarra);
+  color: var(--color-tiza);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Cormorant es fina: en títulos manda la 600 (la cursiva de acento, 500). */
+.font-display {
+  font-variant-numeric: lining-nums;
+  font-weight: 600;
+}
+.font-display.font-medium {
+  font-weight: 600;
+}
+.font-display .font-normal,
+.font-display.font-normal {
+  font-weight: 500;
+}
+
+/* Cortes de línea limpios: títulos equilibrados, párrafos sin viudas. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Botones que responden al pulsar (scale 0.97) y transiciones concretas, nunca "all". */
+.pulsable {
+  transition-property: color, background-color, border-color, opacity, scale, translate;
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-out);
+}
+.pulsable:active {
+  scale: 0.97;
+  transition-duration: 120ms;
+}
+
+::selection {
+  background: var(--color-acento);
+  color: var(--color-sobre-acento);
+}
+
+/* En secciones y tarjetas claras el dorado no se lee: bronce con texto claro encima. */
+.bg-tiza {
+  --color-acento: #80612a;
+  --color-acento-2: #6a4f21;
+  --color-sobre-acento: #f7f3ec;
+}
+
+/* (el grano se quitó en la versión sencilla) */
+
+/* Subrayado a mano para palabras destacadas */
+.trazo {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 C 50 2, 120 2, 198 7' stroke='%23c9a45c' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 0.32em;
+  background-position: 0 100%;
+  padding-bottom: 0.08em;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
